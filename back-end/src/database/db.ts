@@ -35,9 +35,16 @@ export function deleteSubscription(id: number, db = connection) {
 export function getAllPaymentDates(db = connection) {
   return db('paymentDates')
     .join('subscriptions', 'paymentDates.subscriptionId', 'subscriptions.id')
-    .select('paymentDates.id', 'paymentDates.subscriptionId', 'paymentDates.date', 'subscriptions.name', 'subscriptions.frequency', 'subscriptions.startDate', 'subscriptions.endDate', 'subscriptions.category', 'subscriptions.website', 'subscriptions.price', 'subscriptions.reminder')
+    .select('paymentDates.id', 'paymentDates.subscriptionId', 'paymentDates.scheduleDate', 'subscriptions.name', 'subscriptions.frequency', 'subscriptions.startDate', 'subscriptions.endDate', 'subscriptions.category', 'subscriptions.website', 'subscriptions.price', 'subscriptions.reminder')
 
 }
+
+export function getPaymentDatesBySubscriptionId(subscriptionId: number, db = connection) {
+  return db('paymentDates')
+    .where('subscriptionId', subscriptionId)
+    .select()
+}
+
 
 export function deletePaymentDates(subscriptionId: number, db = connection) {
   return db('paymentDates')
