@@ -1,6 +1,6 @@
 import server from './server';
 
-const port = 3000;
+const port = 19000;
 
 // Start the server
 server.listen(port, () => {

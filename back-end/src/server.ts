@@ -8,15 +8,16 @@ server.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
-server.get('/add', async (req, res) => {
+server.get('/v1/subs', async (req, res) => {
   
   const subscriptions = await getAllSubscriptions();
   res.json(subscriptions);
 });
 
-server.post('/add', async (req, res) => {
+server.post('/v1/addsub', async (req, res) => {
   const subscription = req.body;
   await addSubscription(subscription);
+  console.log(subscription);
   res.json(subscription);
 });
 
