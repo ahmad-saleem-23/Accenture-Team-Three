@@ -1,20 +1,3 @@
-import React from "react";
-import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
-import {
-  Button,
-  Input,
-  Text,
-  ApplicationProvider,
-} from "@ui-kitten/components";
-import * as eva from "@eva-design/eva";
-
-export default ({ navigation }) => {
-  return (
-    <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.signInContainer}>
-        <Text style={styles.signInLabel}>Sign UP</Text>
-      </View>
-=======
 import React, { ReactElement } from "react";
 import {
   View,
@@ -30,12 +13,11 @@ import {
   Text,
   useStyleSheet,
   Icon,
-
 } from "@ui-kitten/components";
 // import { PersonIcon } from './extra/icons';
 // import { KeyboardAvoidingView } from './extra/3rd-party';
 
-export default () => {
+export default ({ navigation }) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [passwordVisible, setPasswordVisible] = React.useState(false);
@@ -43,7 +25,7 @@ export default () => {
   const styles = useStyleSheet(themedStyles);
 
   const onSignUpButtonPress = () => {
-    navigation && navigation.navigate("SignUp2");
+    navigation && navigation.navigate("SignUp");
   };
 
   const onForgotPasswordButtonPress = () => {
@@ -63,28 +45,34 @@ export default () => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.headerContainer}>
-        <Image source={require('./components/logo.png')} 
-        style={styles.logoImage}/>
+        <Image
+          source={require("./components/logo.png")}
+          style={styles.logoImage}
+        />
 
-        <Text style={[styles.signInLabel,{color:"black",fontSize:20}]} category="s1" status="control">
+        <Text
+          style={[styles.signInLabel, { color: "black", fontSize: 20 }]}
+          category="s1"
+          status="control"
+        >
           Sign in to your account
         </Text>
       </View>
       <Layout style={styles.container} level="1">
-      <Layout style={styles.formContainer} level="1">
-        <Input
-          placeholder="Email"
-          //   accessoryRight={PersonIcon}
-          value={email}
-          onChangeText={setEmail}
-        />
-        <Input
-          style={styles.passwordInput}
-          placeholder="Password"
-          value={password}
-          secureTextEntry={!passwordVisible}
-          onChangeText={setPassword}
-        />
+        <Layout style={styles.formContainer} level="1">
+          <Input
+            placeholder="Email"
+            //   accessoryRight={PersonIcon}
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Input
+            style={styles.passwordInput}
+            placeholder="Password"
+            value={password}
+            secureTextEntry={!passwordVisible}
+            onChangeText={setPassword}
+          />
         </Layout>
         <View style={styles.forgotPasswordContainer}>
           <Button
@@ -92,15 +80,12 @@ export default () => {
             appearance="ghost"
             status="basic"
             onPress={onForgotPasswordButtonPress}
-          
           >
             Forgot your password?
           </Button>
         </View>
       </Layout>
-      <Button style={styles.signInButton} >
-        SUBMIT
-      </Button>
+      <Button style={styles.signInButton}>SUBMIT</Button>
       <Button
         style={styles.signUpButton}
         appearance="ghost"
@@ -109,32 +94,16 @@ export default () => {
       >
         Register
       </Button>
-
     </KeyboardAvoidingView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 100,
-  },
-  signInLabel: {
-    flex: 1,
-    fontSize: 30,
-  },
-  signInContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-=======
 const themedStyles = StyleService.create({
   container: {
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
+    flex: 1,
   },
   headerContainer: {
     justifyContent: "center",
@@ -145,33 +114,33 @@ const themedStyles = StyleService.create({
   logoImage: {
     width: 180, // Adjust the width as desired
     height: 160, // Adjust the height as desired
-    },
-    signInLabel: {
+  },
+  signInLabel: {
     marginTop: 3,
     fontSize: 16,
-    color: 'gray',
-    },
-    formContainer: {
-      flex: 1,
-      width: 800,
-      justifyContent: "center",
-      alignItems: "center",
-      paddingTop: 13,
-      paddingHorizontal: 16,
-    },
-    
+    color: "gray",
+  },
+  formContainer: {
+    flex: 1,
+    width: 800,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 13,
+    paddingHorizontal: 16,
+  },
+
   signInLabel: {
     marginTop: 12,
   },
   signInButton: {
     borderRadius: 24,
     marginHorizontal: 16,
-    backgroundColor:"#8c52ff"
+    backgroundColor: "#8c52ff",
   },
   signUpButton: {
     //marginVertical: 12,
     //marginHorizontal: 16,
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
   },
   forgotPasswordContainer: {
     flexDirection: "row",
@@ -182,6 +151,6 @@ const themedStyles = StyleService.create({
   },
   forgotPasswordButton: {
     paddingHorizontal: 0,
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
   },
 });
