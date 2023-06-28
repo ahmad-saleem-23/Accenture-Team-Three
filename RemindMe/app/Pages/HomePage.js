@@ -8,7 +8,7 @@ import {
 } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 
-export default function HomePage() {
+export default ({ navigation }) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
 
@@ -21,61 +21,28 @@ export default function HomePage() {
   };
 
   return (
-    <KeyboardAvoidingView>
+    <KeyboardAvoidingView style={styles.container}>
       <View style={styles.signInContainer}>
-        <Text style={styles.signInLabel}>SIGN IN</Text>
-        <Button
-          style={styles.signUpButton}
-          appearance="Filled"
-          status="control"
-          size="giant"
-          onPress={onSignUpButtonPress}
-        >
-          Sign Up
-        </Button>
+        <Text style={styles.signInLabel}>Home Page</Text>
       </View>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 24,
-    paddingHorizontal: 16,
-  },
-  signInContainer: {
-    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
-    marginTop: 24,
-  },
-  socialAuthContainer: {
-    marginTop: 48,
-  },
-  evaButton: {
-    maxWidth: 72,
-    paddingHorizontal: 0,
-  },
-  formContainer: {
-    flex: 1,
-    marginTop: 48,
-  },
-  passwordInput: {
-    marginTop: 16,
+    marginTop: 100,
   },
   signInLabel: {
     flex: 1,
+    fontSize: 30,
   },
-  signUpButton: {
-    flexDirection: "row-reverse",
-    paddingHorizontal: 0,
-  },
-  socialAuthButtonsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-  },
-  socialAuthHintText: {
-    alignSelf: "center",
-    marginBottom: 16,
+  signInContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

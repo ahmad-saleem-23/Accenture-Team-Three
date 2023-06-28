@@ -16,7 +16,7 @@ import {
 // import { PersonIcon } from './extra/icons';
 // import { KeyboardAvoidingView } from './extra/3rd-party';
 
-export default () => {
+export default ({ navigation }) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [passwordVisible, setPasswordVisible] = React.useState(false);
@@ -24,7 +24,7 @@ export default () => {
   const styles = useStyleSheet(themedStyles);
 
   const onSignUpButtonPress = () => {
-    navigation && navigation.navigate("SignUp2");
+    navigation && navigation.navigate("SignUp");
   };
 
   const onForgotPasswordButtonPress = () => {
@@ -65,6 +65,7 @@ export default () => {
           secureTextEntry={!passwordVisible}
           onChangeText={setPassword}
         />
+
         <View style={styles.forgotPasswordContainer}>
           <Button
             style={styles.forgotPasswordButton}
@@ -76,17 +77,19 @@ export default () => {
           </Button>
         </View>
       </Layout>
-      <Button style={styles.signInButton} size="giant">
-        SIGN IN
-      </Button>
-      <Button
-        style={styles.signUpButton}
-        appearance="ghost"
-        status="basic"
-        onPress={onSignUpButtonPress}
-      >
-        Don't have an account? Create
-      </Button>
+      <View>
+        <Button style={styles.signInButton} size="giant">
+          SIGN IN
+        </Button>
+        <Button
+          style={styles.signUpButton}
+          appearance="ghost"
+          status="basic"
+          onPress={onSignUpButtonPress}
+        >
+          Don't have an account? Create
+        </Button>
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -94,6 +97,7 @@ export default () => {
 const themedStyles = StyleService.create({
   container: {
     backgroundColor: "background-basic-color-1",
+    flex: 1,
   },
   headerContainer: {
     justifyContent: "center",
@@ -102,6 +106,9 @@ const themedStyles = StyleService.create({
     backgroundColor: "color-primary-default",
   },
   formContainer: {
+    display: "flex",
+    flexDirection: "column",
+    marginTop: 32,
     flex: 1,
     paddingTop: 32,
     paddingHorizontal: 16,
@@ -110,6 +117,7 @@ const themedStyles = StyleService.create({
     marginTop: 16,
   },
   signInButton: {
+    display: "flex",
     marginHorizontal: 16,
   },
   signUpButton: {
