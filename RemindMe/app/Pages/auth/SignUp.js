@@ -26,6 +26,7 @@ export default ({ navigation }) => {
 
   const onSignUpButtonPress = () => {
     navigation && navigation.navigate("SignUp");
+    navigation && navigation.navigate("SignUp");
   };
 
   const onForgotPasswordButtonPress = () => {

@@ -17,7 +17,7 @@ import {
 // import { PersonIcon } from './extra/icons';
 // import { KeyboardAvoidingView } from './extra/3rd-party';
 
-export default ({ navigation }) => {
+export default () => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [passwordVisible, setPasswordVisible] = React.useState(false);
@@ -25,6 +25,7 @@ export default ({ navigation }) => {
   const styles = useStyleSheet(themedStyles);
 
   const onSignUpButtonPress = () => {
+    navigation && navigation.navigate("SignUp2");
     navigation && navigation.navigate("SignUp2");
   };
 
@@ -110,6 +111,7 @@ const themedStyles = StyleService.create({
     alignItems: "center",
     minHeight: 216,
     backgroundColor: "white",
+    backgroundColor: "white",
   },
   logoImage: {
     width: 180, // Adjust the width as desired
@@ -133,6 +135,7 @@ const themedStyles = StyleService.create({
     marginTop: 12,
   },
   signInButton: {
+    borderRadius: 24,
     borderRadius: 24,
     marginHorizontal: 16,
     backgroundColor: "#8c52ff",
