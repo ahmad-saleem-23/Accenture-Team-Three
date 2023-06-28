@@ -41,6 +41,7 @@ export default ({ navigation }) => {
       price,
       reminder,
     }
+    console.log(newSub)
 
     try {
       const response = await axios.post('/v1/addsub', newSub)
