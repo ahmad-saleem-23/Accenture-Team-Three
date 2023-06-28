@@ -6,13 +6,14 @@ import * as Linking from "expo-linking";
 import { useState } from "react";
 import HomePage from "./Pages/HomePage";
 import SignIn from "./Pages/auth/SignIn";
+import { AppNavigator } from "./navigation.component";
 
 export default function Page() {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
-      <SignIn />
+      <AppNavigator />
     </ApplicationProvider>
   );
 }
