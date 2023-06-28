@@ -82,7 +82,7 @@ export default () => {
         </View>
       </Layout>
       <Button style={styles.signInButton} >
-        SIGN IN
+        SUBMIT
       </Button>
       <Button
         style={styles.signUpButton}
