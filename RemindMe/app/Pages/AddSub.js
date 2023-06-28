@@ -42,17 +42,29 @@ export default ({ navigation }) => {
       price,
       reminder,
     }
-    console.log(newSub)
+     try {
+      const response = await request
+        .post('http://localhost:3000/v1/addsub')
+        .send(newSub)
+      console.log(response)
+      const paymentDates = manageCalendarEvents(startDate, frequency, endDate)
+      console.log(paymentDates)
 
-    try {
-     
-      const response = await request.post(
-        'http://localhost:3000/v1/addsub'
-      ).send(newSub)
-      // const res = await axios.get('/v1/subs')
+      for (const date of paymentDates) {
+        const scheduleDate = date.date
+        const isLastDate = date === paymentDates[paymentDates.length - 1]
+        const subscriptionId = response.text
+        const paymentDate = { scheduleDate, isLastDate: false }
+        if (isLastDate) {
+          paymentDate.isLastDate = true
+        }
+        console.log(subscriptionId)
+        console.log(paymentDate)
+        await request
+          .post(`http://localhost:3000/addpaymentDates/${subscriptionId}`)
+          .send({ ...paymentDate })
+      }
 
-      console.log(response.text)
-      console.log(typeof(response.text))
       navigation.navigate('HomePage')
     } catch (error) {
       console.log(error)
@@ -113,16 +125,6 @@ export default ({ navigation }) => {
           style={styles.input}
           placeholder="Enter price"
         />
-        {/* <TextInput
-          keyboardType="numeric"
-          value={price}
-          onChangeText={(text) => {
-            setPrice(Number(text))
-          }}
-          style={styles.input}
-          placeholder="Enter price"
-          required
-        /> */}
 
         <Toggle checked={reminder} onChange={setReminder}>
           {`Reminder: ${reminder}`}
@@ -183,3 +185,46 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 })
+
+function manageCalendarEvents(startDate, frequency, endDate, maxOccurrences) {
+  var events = []
+  var currentDate = startDate
+  var occurrenceCount = 0
+
+  while (
+    (endDate && currentDate <= endDate) ||
+    (maxOccurrences && occurrenceCount < maxOccurrences)
+  ) {
+    events.push({
+      date: currentDate.toISOString(),
+    })
+
+    var interval = 0
+    if (frequency === 'daily') {
+      interval = 1
+    } else if (frequency === 'weekly') {
+      interval = 7
+    } else if (frequency === 'fortnightly') {
+      interval = 14
+    } else if (frequency === 'monthly') {
+      interval = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        0
+      ).getDate()
+    } else if (frequency === 'quarterly') {
+      interval = 3 * 30
+    } else if (frequency === 'semiannually') {
+      interval = 6 * 30
+    } else if (frequency === 'yearly') {
+      interval = 365
+    }
+    var oneDayInMilliseconds = 86400000
+    currentDate = new Date(
+      currentDate.getTime() + interval * oneDayInMilliseconds
+    )
+
+    occurrenceCount++
+  }
+  return events
+}
