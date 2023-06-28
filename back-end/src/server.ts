@@ -4,9 +4,12 @@ import { getAllSubscriptions,addSubscription, deleteSubscription,updateSubscript
 const server = express();
 server.use(express.json());
 
-server.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
+const cors = require('cors');
+
+
+server.use(cors());
+
+
 
 server.get('/v1/subs', async (req, res) => {
   

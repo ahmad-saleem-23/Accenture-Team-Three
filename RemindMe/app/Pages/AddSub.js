@@ -41,13 +41,17 @@ export default ({ navigation }) => {
       price,
       reminder,
     }
-    console.log(newSub)
+    // console.log(newSub)
 
     try {
-      const response = await axios.post('/v1/addsub', newSub)
+      const response = await axios.post(
+        '/v1/addsub',
+        newSub,
+    
+      )
       // const res = await axios.get('/v1/subs')
 
-      console.log(response.data)
+      console.log(response)
       navigation.navigate('HomePage')
     } catch (error) {
       console.log(error)
