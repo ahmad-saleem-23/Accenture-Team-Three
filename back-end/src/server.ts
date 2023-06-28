@@ -19,9 +19,9 @@ server.get('/v1/subs', async (req, res) => {
 
 server.post('/v1/addsub', async (req, res) => {
   const subscription = req.body;
-  await addSubscription(subscription);
+  const id =await addSubscription(subscription);
   console.log(subscription);
-  res.json(subscription);
+  res.json(id);
 });
 
 server.delete('/delete/:id', async (req, res) => {

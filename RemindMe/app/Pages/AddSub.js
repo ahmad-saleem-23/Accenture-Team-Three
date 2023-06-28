@@ -17,6 +17,7 @@ import {
   Datepicker,
 } from '@ui-kitten/components'
 import axios from 'axios'
+import request from 'superagent'
 
 import * as eva from '@eva-design/eva'
 
@@ -25,7 +26,7 @@ export default ({ navigation }) => {
   const [frequency, setFrequency] = useState()
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
-  const [catagory, setCatagory] = useState()
+  const [category, setCategory] = useState()
   const [website, setWebsite] = useState()
   const [price, setPrice] = useState()
   const [reminder, setReminder] = useState(false)
@@ -36,22 +37,22 @@ export default ({ navigation }) => {
       frequency,
       startDate,
       endDate,
-      catagory,
+      category,
       website,
       price,
       reminder,
     }
-    // console.log(newSub)
+    console.log(newSub)
 
     try {
-      const response = await axios.post(
-        '/v1/addsub',
-        newSub,
-    
-      )
+     
+      const response = await request.post(
+        'http://localhost:3000/v1/addsub'
+      ).send(newSub)
       // const res = await axios.get('/v1/subs')
 
-      console.log(response)
+      console.log(response.text)
+      console.log(typeof(response.text))
       navigation.navigate('HomePage')
     } catch (error) {
       console.log(error)
@@ -88,8 +89,8 @@ export default ({ navigation }) => {
         </Picker>
 
         <Picker
-          selectedValue={catagory}
-          onValueChange={(itemValue) => setCatagory(itemValue)}
+          selectedValue={category}
+          onValueChange={(itemValue) => setCategory(itemValue)}
         >
           <Picker.Item label="Select Catagory" value="" />
           <Picker.Item label="Food & Drink" value="Food & Drink" />
