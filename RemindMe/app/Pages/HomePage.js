@@ -1,47 +1,141 @@
 import React from "react";
-import { ScrollView, View, Image } from "react-native";
+import {
+  ScrollView,
+  View,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 import {
   Button,
   StyleService,
   Text,
   useStyleSheet,
   Avatar,
-  IconPack 
+  IconPack,
 } from "@ui-kitten/components";
 
 export default ({ navigation }) => {
+  // Mock Data
+  const upcoming = [
+    {
+      id: 1,
+      name: "Metlink",
+      frequency: "weekly",
+      startDate: "2023-01-1T08:41:30.872Z",
+      endDate: "2023-12-12T08:41:30.872Z",
+      category: "Travel",
+      website: null,
+      price: 5,
+      reminder: 1,
+    },
+    {
+      id: 2,
+      name: "Netflix",
+      frequency: "fortnightly",
+      startDate: "2023-01-1T08:41:30.872Z",
+      endDate: "2023-12-12T08:41:30.872Z",
+      category: "Entertainment",
+      website: "https://www.netflix.co.nz",
+      price: 50.55,
+      reminder: 1,
+    },
+    {
+      id: 3,
+      name: "Office Max",
+      frequency: "weekly",
+      startDate: "2023-01-1T08:41:30.872Z",
+      endDate: "2023-12-12T08:41:30.872Z",
+      category: "Productivity",
+      website: "https://www.officemax.co.nz",
+      price: 10,
+      reminder: 0,
+    },
+    {
+      id: 4,
+      name: "My Food Bag",
+      frequency: "monthly",
+      startDate: "2023-01-1T08:41:30.872Z",
+      endDate: "2023-12-12T08:41:30.872Z",
+      category: "Food & Drink",
+      website: "https://www.myfoodbag.co.nz",
+      price: 150,
+      reminder: 0,
+    },
+    {
+      id: 5,
+      name: "Countdown",
+      frequency: "weekly",
+      startDate: "2023-01-1T08:41:30.872Z",
+      endDate: "2023-12-12T08:41:30.872Z",
+      category: "Necessities",
+      website: "https://www.countdown.co.nz",
+      price: 150,
+      reminder: 1,
+    },
+    {
+      id: 6,
+      name: "Contact Energy",
+      frequency: "fortnightly",
+      startDate: "2023-01-1T08:41:30.872Z",
+      endDate: "2023-12-12T08:41:30.872Z",
+      category: "Bills",
+      website: "https://www.contact.co.nz",
+      price: 300,
+      reminder: 1,
+    },
+  ];
+
+  function renderUpcoming() {
+    const renderItems = ({ item }) => (
+      <TouchableOpacity style={styles.upcomingButton} onPress={onUpcomingPress}>
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.upcomingButtonText} category="h2">
+              {item.name}
+            </Text>
+          </View>
+
+          <View style={styles.individualsubs}>
+            <Text style={styles.upcomingButtonMoney} category="c1">
+              ${item.price} [Date]
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+
+    return (
+      <FlatList
+        data={upcoming}
+        renderItem={renderItems}
+        keyExtractor={(item) => item.id}
+      />
+    );
+  }
+
   const styles = useStyleSheet(themedStyles);
 
-  const onDoneButtonPress = () => {
-    navigation && navigation.goBack();
-  };
-
-  const renderPhotoButton = () => (
-    <Button
-      style={styles.photoButton}
-      status="basic"
-      //   accessoryLeft={CameraIcon}
-    />
-  );
   const onLogoPress = () => {
     navigation && navigation.goBack();
   };
 
   const onUpcomingPress = () => {
-    navigation && navigation.navigate("IndividualSub")
-  }
+    navigation && navigation.navigate("IndividualSub");
+  };
 
   const addSubscription = () => {
-    navigation && navigation.navigate("AddSub")
-  }
+    navigation && navigation.navigate("AddSub");
+  };
 
   return (
-    <ScrollView
+    <SafeAreaView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
       <View style={themedStyles.ViewContainer}>
-        <Button
+        <TouchableOpacity
           style={styles.logoButton}
           appearance="ghost"
           onPress={onLogoPress}
@@ -52,57 +146,35 @@ export default ({ navigation }) => {
             source={require("./auth/components/logo.png")}
             onPress={onLogoPress}
           />
-        </Button>
+        </TouchableOpacity>
         <Text style={styles.title} category="h1">
           RemindMe
         </Text>
       </View>
 
-    <View>
-      <Text style={styles.spendingText} category="h3">Spending</Text>
-    </View>
+      <View>
+        <Text style={styles.spendingText} category="h3">
+          Spending
+        </Text>
+      </View>
       <Image style={styles.image} source={require("./images/GraphTest.jpg")} />
 
       <View style={styles.upcomingHeaderView}>
-        <Text style={styles.upcomingHeader} category="h1">Upcoming</Text>
-      </View>
-
-      <Button style={styles.upcomingButton} onPress={onUpcomingPress}>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flex:1}}>
-          <Text style={styles.upcomingButtonText} category="h2">
-            Netflix
-          </Text>
-        </View>
-
-        <View style={{flex:1}}>
-          <Text style={styles.upcomingButtonMoney} category="p">
-            $10.00<br/>
-            [Date]
-          </Text>
-          </View>
-      </View>
-      </Button>
-
-      <Button style={styles.upcomingButton} disabled={true}> 
-      <View style={styles.SubscriptionTitleView}>
-        <Text style={styles.upcomingButtonText} category="h2">
-          Hulu
+        <Text style={styles.upcomingHeader} category="h1">
+          Upcoming
         </Text>
       </View>
-      </Button>
-
+      {renderUpcoming()}
       <View style={styles.addButtonFormat}>
         <Button style={styles.addButton} onPress={addSubscription}>
           <View>
-          <Text style={styles.addButtonText} category="h2">
-            +
-          </Text>
+            <Text style={styles.addButtonText} category="h2">
+              +
+            </Text>
           </View>
         </Button>
       </View>
-
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -110,6 +182,12 @@ const themedStyles = StyleService.create({
   container: {
     backgroundColor: "background-basic-color-2",
     backgroundColor: "white",
+    flex: 1,
+  },
+  individualsubs: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "flex-end",
   },
   ViewContainer: {
     display: "flex",
@@ -132,8 +210,8 @@ const themedStyles = StyleService.create({
 
   logoButton: {
     padding: 0,
-    width: 100,
-    height: 100,
+    width: 50,
+    height: 50,
   },
   logoImage: {
     width: "200%",
@@ -163,6 +241,7 @@ const themedStyles = StyleService.create({
     fontWeight: "bold",
     justifyContent: "center",
     alignItems: "center",
+    marginLeft: 50,
   },
   setting: {
     padding: 16,
@@ -179,37 +258,41 @@ const themedStyles = StyleService.create({
 
   spendingText: {
     marginLeft: 12,
-    marginBottom: 8
+    marginBottom: 8,
   },
 
   upcomingHeaderView: {
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 10,
   },
   upcomingHeader: {
     paddingLeft: 12,
   },
-  
+
   upcoming: {
-    display: 'flex'
+    display: "flex",
   },
 
   upcomingButton: {
     fontSize: 20,
-    backgroundColor: 'whitesmoke',
-    borderColor: 'whitesmoke',
+    backgroundColor: "whitesmoke",
+    borderColor: "red",
     marginTop: 10,
+    height: 75,
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "column",
   },
 
   upcomingTextGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 
   upcomingButtonText: {
     fontSize: 25,
-    marginRight: 'auto',
-    marginLeft: 0
+    marginRight: "auto",
+    marginLeft: 0,
   },
 
   upcomingButtonMoney: {
@@ -217,10 +300,11 @@ const themedStyles = StyleService.create({
   },
 
   addButtonFormat: {
-    display: 'flex',
-    marginLeft: 'auto',
+    display: "flex",
+    marginLeft: "auto",
     marginRight: 0,
-    paddingRight: 16
+    paddingRight: 16,
+    height: 200,
   },
 
   addButton: {
@@ -230,10 +314,10 @@ const themedStyles = StyleService.create({
     marginBottom: 100,
     borderRadius: 100,
     backgroundColor: "#C930FF",
-    borderColor: "#C930FF"
+    borderColor: "#C930FF",
   },
 
   addButtonText: {
-    color: 'white',
-  }
+    color: "white",
+  },
 });
