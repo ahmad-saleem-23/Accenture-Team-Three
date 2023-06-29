@@ -14,14 +14,6 @@ export default ({ navigation }) => {
   const onDoneButtonPress = () => {
     navigation && navigation.goBack();
   };
-
-  const renderPhotoButton = () => (
-    <Button
-      style={styles.photoButton}
-      status="basic"
-      //   accessoryLeft={CameraIcon}
-    />
-  );
   const onLogoPress = () => {
     navigation && navigation.goBack();
   };
