@@ -17,7 +17,7 @@ import {
 // import { PersonIcon } from './extra/icons';
 // import { KeyboardAvoidingView } from './extra/3rd-party';
 
-export default () => {
+export default ({navigation})=> {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [passwordVisible, setPasswordVisible] = React.useState(false);
@@ -25,8 +25,11 @@ export default () => {
   const styles = useStyleSheet(themedStyles);
 
   const onSignUpButtonPress = () => {
-    navigation && navigation.navigate("SignUp2");
-    navigation && navigation.navigate("SignUp2");
+    navigation && navigation.navigate("SignUp");
+  };
+
+  const onSignInButtonPress = () => {
+    navigation && navigation.navigate("HomePage");
   };
 
   const onForgotPasswordButtonPress = () => {
@@ -86,7 +89,8 @@ export default () => {
           </Button>
         </View>
       </Layout>
-      <Button style={styles.signInButton}>SUBMIT</Button>
+      <Button style={styles.signInButton}
+      onPress={onSignInButtonPress}>SUBMIT</Button>
       <Button
         style={styles.signUpButton}
         appearance="ghost"
@@ -104,7 +108,7 @@ const themedStyles = StyleService.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    // flex: 1,
+     flex: 1,
   },
   headerContainer: {
     justifyContent: "center",
@@ -137,6 +141,8 @@ const themedStyles = StyleService.create({
   signInButton: {
     borderRadius: 24,
     borderRadius: 24,
+    width:150,
+    marginTop: 10,
     marginHorizontal: 16,
     backgroundColor: "#8c52ff",
   },
