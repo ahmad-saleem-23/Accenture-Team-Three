@@ -103,7 +103,8 @@ const themedStyles = StyleService.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    // flex: 1,
+    flex: 1,
+    marginTop: 40,
   },
   headerContainer: {
     justifyContent: "center",
@@ -122,7 +123,7 @@ const themedStyles = StyleService.create({
   },
   formContainer: {
     flex: 1,
-    width: 800,
+    width: 400,
     justifyContent: "center",
     alignItems: "center",
     paddingTop: 13,
