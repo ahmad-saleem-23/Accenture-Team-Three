@@ -1,23 +1,27 @@
 import express from 'express';
-import { getAllSubscriptions,addSubscription, deleteSubscription,updateSubscription,getAllPaymentDates,deletePaymentDates, getSubscriptionById, getPaymentDatesBySubscriptionId } from './database/db';
+import { getAllSubscriptions,addSubscription, deleteSubscription,updateSubscription,getAllPaymentDates,deletePaymentDates, getSubscriptionById, getPaymentDatesBySubscriptionId, addPaymentDates } from './database/db';
 
 const server = express();
 server.use(express.json());
 
-server.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
+const cors = require('cors');
 
-server.get('/add', async (req, res) => {
+
+server.use(cors());
+
+
+
+server.get('/v1/subs', async (req, res) => {
   
   const subscriptions = await getAllSubscriptions();
   res.json(subscriptions);
 });
 
-server.post('/add', async (req, res) => {
+server.post('/v1/addsub', async (req, res) => {
   const subscription = req.body;
-  await addSubscription(subscription);
-  res.json(subscription);
+  const id =await addSubscription(subscription);
+  console.log(subscription);
+  res.json(id[0]);
 });
 
 server.delete('/delete/:id', async (req, res) => {
@@ -51,5 +55,15 @@ server.get('/paymentDates/:subscriptionId', async (req, res) => {
   const paymentDates = await getPaymentDatesBySubscriptionId(subscriptionId);
   res.json(paymentDates);
 });
+
+server.post('/addpaymentDates/:subscriptionId', async (req, res) => {
+  const subscriptionId = Number(req.params.subscriptionId);
+  console.log(subscriptionId);
+  const paymentDate = req.body;
+  console.log(paymentDate);
+  await addPaymentDates(subscriptionId, paymentDate);
+  res.json(paymentDate);
+});
+
 
 export default server;
