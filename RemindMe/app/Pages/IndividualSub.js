@@ -120,6 +120,7 @@ const themedStyles = StyleService.create({
     fontSize: 20,
     margin: 8,
   },
+
   logoButton: {
     padding: 0,
     width: 100,

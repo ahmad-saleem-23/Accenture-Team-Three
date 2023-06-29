@@ -21,11 +21,26 @@ export default ({ navigation }) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [alert, setAlert] = React.useState("");
+  const [alertActive, setAlertActive] = React.useState(false);
+  const mockAccount = {
+    email: "Test@test.com",
+    password: "password",
+  };
 
   const styles = useStyleSheet(themedStyles);
 
   const onSignUpButtonPress = () => {
-    navigation && navigation.navigate("SignUp2");
+    navigation && navigation.navigate("SignUp");
+  };
+
+  const onSignInButtonPress = () => {
+    {
+      email === mockAccount.email && password === mockAccount.password
+        ? navigation && navigation.navigate("HomePage")
+        : setAlert("Incorrect email or password");
+    }
+    // navigation && navigation.navigate("HomePage");
   };
 
   const onForgotPasswordButtonPress = () => {
@@ -73,6 +88,7 @@ export default ({ navigation }) => {
             secureTextEntry={!passwordVisible}
             onChangeText={setPassword}
           />
+          {alert !== "" && <Text style={styles.alertText}>{alert}</Text>}
         </Layout>
         <View style={styles.forgotPasswordContainer}>
           <Button
@@ -85,7 +101,9 @@ export default ({ navigation }) => {
           </Button>
         </View>
       </Layout>
-      <Button style={styles.signInButton}>SUBMIT</Button>
+      <Button style={styles.signInButton} onPress={onSignInButtonPress}>
+        SUBMIT
+      </Button>
       <Button
         style={styles.signUpButton}
         appearance="ghost"
@@ -104,17 +122,22 @@ const themedStyles = StyleService.create({
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    marginTop: 40,
+  },
+  alertText: {
+    marginTop: 10,
+    color: "red",
   },
   headerContainer: {
     justifyContent: "center",
     alignItems: "center",
     minHeight: 216,
     backgroundColor: "white",
+    backgroundColor: "white",
   },
   logoImage: {
     width: 180, // Adjust the width as desired
     height: 160, // Adjust the height as desired
+    marginTop: 40,
   },
   signInLabel: {
     marginTop: 3,
@@ -124,7 +147,6 @@ const themedStyles = StyleService.create({
   formContainer: {
     flex: 1,
     width: 400,
-    justifyContent: "center",
     alignItems: "center",
     paddingTop: 13,
     paddingHorizontal: 16,
@@ -135,6 +157,9 @@ const themedStyles = StyleService.create({
   },
   signInButton: {
     borderRadius: 24,
+    borderRadius: 24,
+    width: 150,
+    marginTop: 10,
     marginHorizontal: 16,
     backgroundColor: "#8c52ff",
   },
@@ -145,7 +170,7 @@ const themedStyles = StyleService.create({
   },
   forgotPasswordContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    // justifyContent: "center",
   },
   passwordInput: {
     marginTop: 16,

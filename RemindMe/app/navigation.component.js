@@ -20,8 +20,8 @@ const HomeNavigator = () => {
 
   return (
     <Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName={user ? "HomePage" : "IndividualSub"}
+      screenOptions={{ headerShown: false}}
+      initialRouteName={user ? "HomePage" : "SignIn"}
     >
       <Screen name="SignIn" component={SignIn} />
       <Screen name="SignUp" component={SignUp} />
