@@ -25,12 +25,9 @@ export default ({ navigation }) => {
   const styles = useStyleSheet(themedStyles);
 
   const onSignUpButtonPress = () => {
-    navigation && navigation.navigate("SignUp");
+    navigation && navigation.navigate("HomePage");
   };
 
-  const onForgotPasswordButtonPress = () => {
-    navigation && navigation.navigate("ForgotPassword");
-  };
 
   const onPasswordIconPress = () => {
     setPasswordVisible(!passwordVisible);
@@ -55,12 +52,19 @@ export default ({ navigation }) => {
           category="s1"
           status="control"
         >
-          Sign in to your account
+          Welcome, create your account here!
         </Text>
       </View>
       <Layout style={styles.container} level="1">
         <Layout style={styles.formContainer} level="1">
+        <Input
+            placeholder="Full Name"
+            //   accessoryRight={PersonIcon}
+            value={email}
+            onChangeText={setEmail}
+          />
           <Input
+            style={styles.passwordInput}
             placeholder="Email"
             //   accessoryRight={PersonIcon}
             value={email}
@@ -74,26 +78,11 @@ export default ({ navigation }) => {
             onChangeText={setPassword}
           />
         </Layout>
-        <View style={styles.forgotPasswordContainer}>
-          <Button
-            style={styles.forgotPasswordButton}
-            appearance="ghost"
-            status="basic"
-            onPress={onForgotPasswordButtonPress}
-          >
-            Forgot your password?
-          </Button>
-        </View>
+       
       </Layout>
-      <Button style={styles.signInButton}>SUBMIT</Button>
-      <Button
-        style={styles.signUpButton}
-        appearance="ghost"
-        status="basic"
-        onPress={onSignUpButtonPress}
-      >
-        Register
-      </Button>
+      <Button style={styles.signInButton} onPress={onSignUpButtonPress}>SUBMIT</Button>
+
+     
     </KeyboardAvoidingView>
   );
 };
@@ -103,7 +92,7 @@ const themedStyles = StyleService.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
+    flex:1,
   },
   headerContainer: {
     justifyContent: "center",
@@ -132,25 +121,16 @@ const themedStyles = StyleService.create({
   signInLabel: {
     marginTop: 12,
   },
+
   signInButton: {
+    marginButton: 80,
+    width:150,
     borderRadius: 24,
     marginHorizontal: 16,
     backgroundColor: "#8c52ff",
   },
-  signUpButton: {
-    //marginVertical: 12,
-    //marginHorizontal: 16,
-    textDecorationLine: "underline",
-  },
-  forgotPasswordContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
   passwordInput: {
     marginTop: 16,
   },
-  forgotPasswordButton: {
-    paddingHorizontal: 0,
-    textDecorationLine: "underline",
-  },
+ 
 });
