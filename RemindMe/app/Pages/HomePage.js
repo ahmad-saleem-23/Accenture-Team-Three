@@ -241,6 +241,8 @@ const themedStyles = StyleService.create({
     width: "90%",
     borderRadius: 16,
     alignSelf: "center",
+    borderColor: "#C930FF",
+    borderWidth: 1,
   },
 
   logoButton: {
@@ -343,17 +345,20 @@ const themedStyles = StyleService.create({
     marginLeft: "auto",
     marginRight: 0,
     paddingRight: 16,
-    height: 200,
+    // paddingTop: 10,
+    // height: 150,
+    backgroundColor: "transparent",
   },
 
   addButton: {
     height: 75,
     width: 75,
-    marginTop: 100,
-    marginBottom: 100,
+    // marginTop: 100,
+    // marginBottom: 100,
     borderRadius: 100,
     backgroundColor: "#C930FF",
     borderColor: "#C930FF",
+    justifyContent: "center",
   },
 
   addButtonText: {
