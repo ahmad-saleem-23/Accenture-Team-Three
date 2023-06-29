@@ -16,12 +16,15 @@ import {
   IconPack,
 } from "@ui-kitten/components";
 
+import images from "./images/images";
+
 export default ({ navigation }) => {
   // Mock Data
   const upcoming = [
     {
       id: 1,
       name: "Metlink",
+      scheduleDate: "2023-07-1T08:41:30.872Z",
       frequency: "weekly",
       startDate: "2023-01-1T08:41:30.872Z",
       endDate: "2023-12-12T08:41:30.872Z",
@@ -33,6 +36,7 @@ export default ({ navigation }) => {
     {
       id: 2,
       name: "Netflix",
+      scheduleDate: "2023-07-05T08:41:30.872Z",
       frequency: "fortnightly",
       startDate: "2023-01-1T08:41:30.872Z",
       endDate: "2023-12-12T08:41:30.872Z",
@@ -43,7 +47,8 @@ export default ({ navigation }) => {
     },
     {
       id: 3,
-      name: "Office Max",
+      name: "OfficeMax",
+      scheduleDate: "2023-07-15T08:41:30.872Z",
       frequency: "weekly",
       startDate: "2023-01-1T08:41:30.872Z",
       endDate: "2023-12-12T08:41:30.872Z",
@@ -55,6 +60,7 @@ export default ({ navigation }) => {
     {
       id: 4,
       name: "My Food Bag",
+      scheduleDate: "2023-07-19T08:41:30.872Z",
       frequency: "monthly",
       startDate: "2023-01-1T08:41:30.872Z",
       endDate: "2023-12-12T08:41:30.872Z",
@@ -66,6 +72,7 @@ export default ({ navigation }) => {
     {
       id: 5,
       name: "Countdown",
+      scheduleDate: "2023-07-19T08:41:30.872Z",
       frequency: "weekly",
       startDate: "2023-01-1T08:41:30.872Z",
       endDate: "2023-12-12T08:41:30.872Z",
@@ -77,6 +84,7 @@ export default ({ navigation }) => {
     {
       id: 6,
       name: "Contact Energy",
+      scheduleDate: "2023-07-25T08:41:30.872Z",
       frequency: "fortnightly",
       startDate: "2023-01-1T08:41:30.872Z",
       endDate: "2023-12-12T08:41:30.872Z",
@@ -86,11 +94,30 @@ export default ({ navigation }) => {
       reminder: 1,
     },
   ];
+  function getRemainingDays(scheduleDate) {
+    const currentDate = new Date(); // Get today's date
+    const targetDate = new Date(scheduleDate); // Convert the scheduleDate string to a Date object
+
+    // Calculate the difference in milliseconds between the two dates
+    const differenceMs = targetDate.getTime() - currentDate.getTime();
+
+    // Convert the milliseconds to days
+    const daysRemaining = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
+
+    return daysRemaining;
+  }
 
   function renderUpcoming() {
     const renderItems = ({ item }) => (
       <TouchableOpacity style={styles.upcomingButton} onPress={onUpcomingPress}>
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", marginRight: 50 }}>
+          <View style={{ flex: 1, marginLeft: 50 }}>
+            <Image
+              source={images[item.name.replace(/\s/g, "")]}
+              resizeMode="cover"
+              style={styles.logoImageForMenu}
+            />
+          </View>
           <View style={{ flex: 1 }}>
             <Text style={styles.upcomingButtonText} category="h2">
               {item.name}
@@ -98,8 +125,11 @@ export default ({ navigation }) => {
           </View>
 
           <View style={styles.individualsubs}>
-            <Text style={styles.upcomingButtonMoney} category="c1">
-              ${item.price} [Date]
+            <Text style={styles.upcomingButtonMoney} category="h4">
+              ${item.price}
+            </Text>
+            <Text style={styles.upcomingButtonMoney} category="h4">
+              {getRemainingDays(item.scheduleDate)} days left
             </Text>
           </View>
         </View>
@@ -157,7 +187,7 @@ export default ({ navigation }) => {
           Spending
         </Text>
       </View>
-      <Image style={styles.image} source={require("./images/GraphTest.jpg")} />
+      <Image style={styles.image} source={require("./images/imageGraph.png")} />
 
       <View style={styles.upcomingHeaderView}>
         <Text style={styles.upcomingHeader} category="h1">
@@ -183,6 +213,11 @@ const themedStyles = StyleService.create({
     backgroundColor: "background-basic-color-2",
     backgroundColor: "white",
     flex: 1,
+  },
+  logoImageForMenu: {
+    width: 50,
+    height: 50,
+    borderRadius: 0,
   },
   individualsubs: {
     flex: 1,
@@ -275,8 +310,12 @@ const themedStyles = StyleService.create({
 
   upcomingButton: {
     fontSize: 20,
+    marginLeft: 12,
+    marginRight: 12,
+    borderRadius: 20,
     backgroundColor: "whitesmoke",
-    borderColor: "red",
+    borderColor: "#C930FF",
+    borderWidth: 1,
     marginTop: 10,
     height: 75,
     justifyContent: "center",
@@ -290,7 +329,7 @@ const themedStyles = StyleService.create({
   },
 
   upcomingButtonText: {
-    fontSize: 25,
+    fontSize: 20,
     marginRight: "auto",
     marginLeft: 0,
   },
