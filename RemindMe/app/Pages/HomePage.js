@@ -6,6 +6,7 @@ import {
   Text,
   useStyleSheet,
   Avatar,
+  IconPack 
 } from "@ui-kitten/components";
 
 export default ({ navigation }) => {
@@ -25,6 +26,14 @@ export default ({ navigation }) => {
   const onLogoPress = () => {
     navigation && navigation.goBack();
   };
+
+  const onUpcomingPress = () => {
+    navigation && navigation.navigate("IndividualSub")
+  }
+
+  const addSubscription = () => {
+    navigation && navigation.navigate("AddSub")
+  }
 
   return (
     <ScrollView
@@ -49,12 +58,50 @@ export default ({ navigation }) => {
         </Text>
       </View>
 
-      <Image style={styles.image} source={require("./images/test.jpg")} />
+    <View>
+      <Text style={styles.spendingText} category="h3">Spending</Text>
+    </View>
+      <Image style={styles.image} source={require("./images/GraphTest.jpg")} />
+
+      <View style={styles.upcomingHeaderView}>
+        <Text style={styles.upcomingHeader} category="h1">Upcoming</Text>
+      </View>
+
+      <Button style={styles.upcomingButton} onPress={onUpcomingPress}>
+      <View style={{flexDirection:"row"}}>
+        <View style={{flex:1}}>
+          <Text style={styles.upcomingButtonText} category="h2">
+            Netflix
+          </Text>
+        </View>
+
+        <View style={{flex:1}}>
+          <Text style={styles.upcomingButtonMoney} category="p">
+            $10.00<br/>
+            [Date]
+          </Text>
+          </View>
+      </View>
+      </Button>
+
+      <Button style={styles.upcomingButton} disabled={true}> 
       <View style={styles.SubscriptionTitleView}>
-        <Text style={styles.SubscriptionTitle} category="h1">
-          Netflix
+        <Text style={styles.upcomingButtonText} category="h2">
+          Hulu
         </Text>
       </View>
+      </Button>
+
+      <View style={styles.addButtonFormat}>
+        <Button style={styles.addButton} onPress={addSubscription}>
+          <View>
+          <Text style={styles.addButtonText} category="h2">
+            +
+          </Text>
+          </View>
+        </Button>
+      </View>
+
     </ScrollView>
   );
 };
@@ -76,34 +123,13 @@ const themedStyles = StyleService.create({
     width: 10,
     height: 10,
   },
-  SubscriptionTitleView: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 16,
-    borderRadius: 16,
-    backgroundColor: "background-basic-color-4",
-  },
+
   image: {
-    width: "60%",
+    width: "90%",
     borderRadius: 16,
     alignSelf: "center",
   },
-  info: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
-    borderRadius: 16,
-    backgroundColor: "background-basic-color-4",
-  },
-  infoText: {
-    color: "black",
-    fontSize: 20,
-    margin: 8,
-  },
+
   logoButton: {
     padding: 0,
     width: 100,
@@ -150,4 +176,64 @@ const themedStyles = StyleService.create({
     backgroundColor: "red",
     borderRadius: 24,
   },
+
+  spendingText: {
+    marginLeft: 12,
+    marginBottom: 8
+  },
+
+  upcomingHeaderView: {
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  upcomingHeader: {
+    paddingLeft: 12,
+  },
+  
+  upcoming: {
+    display: 'flex'
+  },
+
+  upcomingButton: {
+    fontSize: 20,
+    backgroundColor: 'whitesmoke',
+    borderColor: 'whitesmoke',
+    marginTop: 10,
+  },
+
+  upcomingTextGroup: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  upcomingButtonText: {
+    fontSize: 25,
+    marginRight: 'auto',
+    marginLeft: 0
+  },
+
+  upcomingButtonMoney: {
+    fontSize: 16,
+  },
+
+  addButtonFormat: {
+    display: 'flex',
+    marginLeft: 'auto',
+    marginRight: 0,
+    paddingRight: 16
+  },
+
+  addButton: {
+    height: 75,
+    width: 75,
+    marginTop: 100,
+    marginBottom: 100,
+    borderRadius: 100,
+    backgroundColor: "#C930FF",
+    borderColor: "#C930FF"
+  },
+
+  addButtonText: {
+    color: 'white',
+  }
 });
