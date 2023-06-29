@@ -68,7 +68,7 @@ export default ({ navigation }) => {
         </Text>
       </View>
       <Button style={styles.delete} onPress={onDoneButtonPress} status="danger">
-        DELETE
+        Stop Tracking
       </Button>
     </ScrollView>
   );
@@ -78,6 +78,7 @@ const themedStyles = StyleService.create({
   container: {
     backgroundColor: "background-basic-color-2",
     backgroundColor: "white",
+    flex: 1,
   },
   ViewContainer: {
     display: "flex",
