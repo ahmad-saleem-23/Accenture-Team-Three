@@ -148,7 +148,7 @@ export default ({ navigation }) => {
   const styles = useStyleSheet(themedStyles);
 
   const onLogoPress = () => {
-    navigation && navigation.goBack();
+    navigation && navigation.navigate("Profile");
   };
 
   const onUpcomingPress = () => {
@@ -173,12 +173,12 @@ export default ({ navigation }) => {
           <Avatar
             style={styles.logoImage}
             shape="square"
-            source={require("./auth/components/logo.png")}
+            source={require("./images/user-solid.png")}
             onPress={onLogoPress}
           />
         </TouchableOpacity>
         <Text style={styles.title} category="h1">
-          RemindMe
+          SubWise
         </Text>
       </View>
 
@@ -251,9 +251,10 @@ const themedStyles = StyleService.create({
     height: 50,
   },
   logoImage: {
-    width: "200%",
-    height: "200%",
+    width: "100%",
+    height: "100%",
     borderRadius: 0,
+    margin: 30,
   },
   contentContainer: {
     paddingVertical: 24,
@@ -278,7 +279,7 @@ const themedStyles = StyleService.create({
     fontWeight: "bold",
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 50,
+    marginLeft: 60,
   },
   setting: {
     padding: 16,
