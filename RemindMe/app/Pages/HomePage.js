@@ -1,61 +1,37 @@
 import React from "react";
-import { StyleSheet, View, KeyboardAvoidingView, ImageBackground, ListRenderItemInfo, Image, TouchableOpacity } from "react-native";
+import { ScrollView, View, Image } from "react-native";
 import {
   Button,
-  Input,
+  StyleService,
   Text,
-  Card,
+  useStyleSheet,
   Avatar,
-  ApplicationProvider,
 } from "@ui-kitten/components";
-import * as eva from "@eva-design/eva";
 
 export default ({ navigation }) => {
-  const [email, setEmail] = React.useState();
-  const [password, setPassword] = React.useState();
+  const styles = useStyleSheet(themedStyles);
 
-  const onSignInButtonPress = () => {
+  const onDoneButtonPress = () => {
     navigation && navigation.goBack();
   };
 
-  const onSignUpButtonPress = () => {
-    navigation && navigation.navigate("SignUp1");
-  };
-
-  const onProfileButtonPress = () => {
-    navigation && navigation.navigate("Profile")
-  };
-
+  const renderPhotoButton = () => (
+    <Button
+      style={styles.photoButton}
+      status="basic"
+      //   accessoryLeft={CameraIcon}
+    />
+  );
   const onLogoPress = () => {
     navigation && navigation.goBack();
   };
 
-  const renderItemHeader = () => {
-    <ImageBackground
-      style={styles.itemHeader}
-      source={info.item.image}
-    />
-  };
-
-
-
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.signInContainer}>
-      {/* <Button
-        onPress={onProfileButtonPress}
-        title="Profile"
-        color="#841584"
-        style={styles.profileButton}
-      >
-        <Image source={require("./images/user-solid.svg")}/>
-      </Button> */}
-
-      {/* <TouchableOpacity onPress={onProfileButtonPress} activeOpacity={1.0}>
-        <ImageBackground source={require('./images/user-solid.png')}/>
-      </TouchableOpacity> */}
-
-      <View style={styles.ViewContainer}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+    >
+      <View style={themedStyles.ViewContainer}>
         <Button
           style={styles.logoButton}
           appearance="ghost"
@@ -68,62 +44,65 @@ export default ({ navigation }) => {
             onPress={onLogoPress}
           />
         </Button>
-        {/* <Text style={styles.title} category="h1">
+        <Text style={styles.title} category="h1">
           RemindMe
-        </Text> */}
+        </Text>
       </View>
 
-        {/* <Text style={styles.signInLabel}>RemindMe</Text> */}
+      <Image style={styles.image} source={require("./images/test.jpg")} />
+      <View style={styles.SubscriptionTitleView}>
+        <Text style={styles.SubscriptionTitle} category="h1">
+          Netflix
+        </Text>
       </View>
-      <View style={styles.graphContainer}>
-      <Card title='Spending'>
-              <Image
-                source={require("./images/test.jpg")}
-              />
-        <Button
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}>View</Button>
-        </Card>
-        </View>
-    </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 100,
-  },
-  signInLabel: {
-    flex: 1,
-    fontSize: 30,
-  },
-  signInContainer: {
-    flex: 1,
-    justifyContent: "space-betweeen",
-    alignItems: "left",
-    alignContent: "space-around",
-    flexDirection: "row"
-  },
-  list: {
-    flex: 1,
-  },
-  item: {
-    borderRadius: 0,
-    marginVertical: 8,
-  },
-  itemHeader: {
-    height: 160,
-  },
-  itemFooter: {
-    flexDirection: 'row',
-    marginTop: 16,
-    marginHorizontal: -4,
+    backgroundColor: "background-basic-color-2",
+    backgroundColor: "white",
   },
   ViewContainer: {
     display: "flex",
     flexDirection: "row",
+  },
+  editButton: {
+    width: 10,
+    height: 10,
+  },
+  editButton: {
+    width: 10,
+    height: 10,
+  },
+  SubscriptionTitleView: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 16,
+    borderRadius: 16,
+    backgroundColor: "background-basic-color-4",
+  },
+  image: {
+    width: "60%",
+    borderRadius: 16,
+    alignSelf: "center",
+  },
+  info: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+    borderRadius: 16,
+    backgroundColor: "background-basic-color-4",
+  },
+  infoText: {
+    color: "black",
+    fontSize: 20,
+    margin: 8,
   },
   logoButton: {
     padding: 0,
@@ -135,6 +114,23 @@ const styles = StyleSheet.create({
     height: "200%",
     borderRadius: 0,
   },
+  contentContainer: {
+    paddingVertical: 24,
+    backgroundColor: "background-basic-color-2",
+  },
+  photo: {
+    alignSelf: "center",
+    width: 320,
+    height: 320,
+    borderRadius: 16,
+  },
+  photoButton: {
+    right: 16,
+    top: 32,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+  },
   title: {
     padding: 34,
     fontSize: 30,
@@ -142,17 +138,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  activityButton: {
-    marginHorizontal: 4,
-    paddingHorizontal: 0,
+  setting: {
+    padding: 16,
   },
-  graphContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  section: {
+    marginTop: 24,
   },
-  // profileButton: {
-  //   height: 30,
-  //   width: 30,
-  // }
+  delete: {
+    marginHorizontal: 24,
+    marginTop: 24,
+    backgroundColor: "red",
+    borderRadius: 24,
+  },
 });
