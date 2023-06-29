@@ -1,13 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
+import { Link, Stack } from "expo-router";
+import { ApplicationProvider, Layout, Text } from "@ui-kitten/components";
+import * as eva from "@eva-design/eva";
+import * as Linking from "expo-linking";
+import { useState } from "react";
+import HomePage from "./Pages/HomePage";
+import SignIn from "./Pages/auth/SignIn";
+import { AppNavigator } from "./navigation.component";
 
 export default function Page() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <AppNavigator />
+    </ApplicationProvider>
   );
 }
 
