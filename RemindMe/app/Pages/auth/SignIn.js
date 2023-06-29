@@ -147,7 +147,6 @@ const themedStyles = StyleService.create({
   formContainer: {
     flex: 1,
     width: 400,
-    // justifyContent: "center",
     alignItems: "center",
     paddingTop: 13,
     paddingHorizontal: 16,
